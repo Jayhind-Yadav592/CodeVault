@@ -8,7 +8,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         base_dir = settings.BASE_DIR
         
-        excluded_dirs = ['.git', 'venv', 'node_modules', '__pycache__', 'migrations', 'scratch']
+        excluded_dirs = ['.git', 'venv', 'node_modules', '__pycache__', 'migrations', 'scratch', 'dist']
         excluded_exts = ['.pyc', '.sqlite3', '.log', '.env']
         
         counts = {
@@ -47,7 +47,7 @@ class Command(BaseCommand):
                             counts['HTML LOC'] += lines
                         elif file.endswith('.css'):
                             counts['CSS LOC'] += lines
-                        elif file.endswith('.js'):
+                        elif file.endswith('.js') or file.endswith('.ts') or file.endswith('.tsx') or file.endswith('.jsx'):
                             counts['JavaScript LOC'] += lines
                         elif file.endswith('.md'):
                             counts['Documentation LOC'] += lines
