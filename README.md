@@ -118,6 +118,14 @@ CodeVault incorporates a robust, privacy-respecting **Marketplace** that allows 
 - **Explainable Recommendations**: A rule-based engine generates customized project recommendations by analyzing a developer's explicit `SavedProject` portfolio. Each suggestion returns a discrete `recommendation_reason` without relying on black-box AI logic.
 - **Analytics & Curation**: Supports user-curated `Watchlist`s and `SavedProject` folders. Features asynchronous telemetry via `SearchQueryLog` to identify "Zero-Result Searches", letting administrators spot unserved market demands.
 
+## Phase 13: Team Collaboration, Developer Workspace & Project Operations
+
+A robust internal collaborative workspace mapping technical operators to project deliverables while maintaining a fierce separation from legal intellectual property logic.
+- **Organization & Role Sandboxing**: Supports multi-tenant organizational structure with encrypted, time-bounded member invitations and discrete role assignments (Owner, Admin, Member) that strictly bound system access limits.
+- **Integrated Project Ops**: Houses native `ProjectTasks`, `ProjectMilestones`, and internal `ProjectDiscussions`. Crucially implements explicit **Architecture Decision Records (ADRs)** to preserve contextual memory.
+- **Compliance-Aware Releases**: Exposes semantic `ProjectRelease` objects that directly tie abstract version numbers (e.g., v1.4) back to a mathematically immutable Git `AnalysisSnapshot`.
+- **Security Boundaries**: Protected comprehensively by custom DRF Permission blocks (`IsProjectMember`, `IsOrganizationAdmin`) guaranteeing Absolute IDOR (Insecure Direct Object Reference) isolation across projects.
+
 ## Requirements
 
 - Python 3.11+

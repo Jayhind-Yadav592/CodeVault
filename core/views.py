@@ -95,3 +95,11 @@ def marketplace_search(request):
 
 def marketplace_detail(request, pk):
     return render(request, 'core/marketplace_detail.html', {'pk': pk})
+
+@login_required
+def org_workspace_dashboard(request, org_id):
+    return render(request, 'core/workspace/org_dashboard.html', {'org_id': org_id})
+
+@login_required
+def project_workspace_dashboard(request, project_id):
+    return render(request, 'core/workspace/project_dashboard.html', {'project_id': project_id})
