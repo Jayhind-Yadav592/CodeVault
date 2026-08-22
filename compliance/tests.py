@@ -83,38 +83,41 @@ class TestScannerRules:
             assert 'python_django' in res['evidence']['detected_environments']
 
     def test_secret_detection_rule(self, project_setup, policy):
-        _, _, snap = project_setup
+        _, proj, snap = project_setup
         eval = ComplianceEvaluation.objects.create(snapshot=snap, policy=policy)
         
-        with tempfile.TemporaryDirectory() as temp_dir:
-            # Create a file with a fake AWS key
-            with open(os.path.join(temp_dir, 'config.py'), 'w') as f:
-                f.write('AWS_KEY = "AKIAIOSFODNN7EXAMPLE"')
-                
-            ctx = RuleContext(eval, repo_path=temp_dir)
-            rule = SecretDetectionRule()
-            res = rule.evaluate(ctx)
-            
-            assert res['status'] == RuleResult.Status.FAIL
-            assert res['is_critical_failure'] is True
-            assert res['evidence']['secrets_found'] == 1
-            assert res['evidence']['findings'][0]['value'] == '[REDACTED]'
+        from security.models import Finding
+        Finding.objects.create(
+            project=proj, snapshot=snap, scanner_id='test',
+            category=Finding.Category.SECRET, severity=Finding.Severity.CRITICAL,
+            confidence='HIGH', short_description='Test Secret', redacted_evidence='[REDACTED]'
+        )
+        
+        ctx = RuleContext(eval)
+        rule = SecretDetectionRule()
+        res = rule.evaluate(ctx)
+        
+        assert res['status'] == RuleResult.Status.FAIL
+        assert res['is_critical_failure'] is True
+        assert res['evidence']['secrets_found'] == 1
 
     def test_license_rule_fails_on_gpl(self, project_setup, policy):
-        _, _, snap = project_setup
+        _, proj, snap = project_setup
         eval = ComplianceEvaluation.objects.create(snapshot=snap, policy=policy)
         
-        with tempfile.TemporaryDirectory() as temp_dir:
-            with open(os.path.join(temp_dir, 'LICENSE'), 'w') as f:
-                f.write('GNU GENERAL PUBLIC LICENSE')
-                
-            ctx = RuleContext(eval, repo_path=temp_dir)
-            rule = LicenseRule()
-            res = rule.evaluate(ctx)
-            
-            assert res['status'] == RuleResult.Status.FAIL
-            assert res['is_critical_failure'] is True
-            assert 'GPL' in res['evidence']['detected_licenses']
+        from security.models import Finding
+        Finding.objects.create(
+            project=proj, snapshot=snap, scanner_id='test',
+            category=Finding.Category.LICENSE, severity=Finding.Severity.CRITICAL,
+            confidence='HIGH', short_description='Test License', redacted_evidence='[REDACTED]'
+        )
+        
+        ctx = RuleContext(eval)
+        rule = LicenseRule()
+        res = rule.evaluate(ctx)
+        
+        assert res['status'] == RuleResult.Status.FAIL
+        assert res['is_critical_failure'] is True
 
 @pytest.mark.django_db
 class TestEngineAndTasks:

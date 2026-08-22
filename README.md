@@ -60,6 +60,14 @@ Phase 4 introduces a dynamic, modular rule engine that validates repository snap
 - **Transparent Scoring & Decision Matrix**: Rules produce verifiable `RuleResult` evidence, culminating in explicit categorizations (`ELIGIBLE`, `REQUIRES_HUMAN_REVIEW`, etc.) with actionable remediations.
 - **API & UI**: Provides detailed requirement matrices via the Compliance Dashboard and DRF APIs.
 
+## Phase 5: Deep Security, License & Intellectual Property Analysis
+
+Phase 5 introduces an advanced security and intellectual property scanning subsystem.
+- **Specialized Scanner Framework**: Deploys independent heuristic and regex-based scanners for secrets, PII, dependencies, licensing, and proprietary copyright headers.
+- **Strict Evidence Redaction**: Context-aware redaction replaces identified sensitive material (e.g., JWTs, AWS Keys, SSNs) with safe placeholder tags (`[REDACTED]`) before they hit the ORM.
+- **Cross-Phase Integration**: Seamlessly integrates into Phase 4, turning security discoveries into critical, automated compliance failures requiring human-review overrides.
+- **Reviewer Workflow**: Maintains an immutable `FindingActivity` ledger to audit every finding interaction, including resolving, acknowledging, and marking false positives.
+
 ## Requirements
 
 - Python 3.11+

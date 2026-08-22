@@ -26,3 +26,8 @@ def project_compliance(request, project_id):
 def project_repository(request, project_id):
     project = request.user.owned_projects.get(id=project_id)
     return render(request, 'core/repository.html', {'project': project})
+
+@login_required
+def project_security(request, project_id):
+    project = request.user.owned_projects.get(id=project_id)
+    return render(request, 'core/security.html', {'project': project})

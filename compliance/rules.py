@@ -229,32 +229,20 @@ class LicenseRule(BaseRule):
     description = 'Detects if prohibited open-source licenses exist in source code.'
     category = ComplianceRule.Category.LICENSING
     severity = ComplianceRule.Severity.CRITICAL
-    requires_file_scan = True
+    requires_file_scan = False
 
     def evaluate(self, context: RuleContext):
-        forbidden = ['gpl', 'agpl']
-        found_licenses = []
+        from security.models import Finding
+        licenses = Finding.objects.filter(
+            snapshot=context.snapshot, 
+            category__in=[Finding.Category.LICENSE, Finding.Category.THIRD_PARTY],
+            severity__in=[Finding.Severity.CRITICAL, Finding.Severity.HIGH],
+            status=Finding.Status.OPEN
+        )
         
-        for root, dirs, files in os.walk(context.repo_path):
-            if '.git' in root: continue
-            for file in files:
-                if 'license' in file.lower() or 'copying' in file.lower():
-                    try:
-                        with open(os.path.join(root, file), 'r', encoding='utf-8', errors='ignore') as f:
-                            content = f.read().lower()
-                            if 'gnu general public license' in content:
-                                found_licenses.append('GPL')
-                            if 'mit license' in content:
-                                found_licenses.append('MIT')
-                            if 'apache license' in content:
-                                found_licenses.append('Apache-2.0')
-                    except:
-                        pass
-
-        evidence = {'detected_licenses': list(set(found_licenses))}
-        for lic in evidence['detected_licenses']:
-            if lic.lower() in forbidden:
-                return self._fail(evidence, remediation="Remove prohibited open-source source code.", critical=True)
+        evidence = {'prohibited_licenses_found': licenses.count()}
+        if licenses.exists():
+            return self._fail(evidence, remediation="Remove prohibited open-source source code.", critical=True)
                 
         return self._pass(evidence)
 
@@ -284,42 +272,18 @@ class SecretDetectionRule(BaseRule):
     description = 'Scans for committed secrets (API keys, passwords, tokens).'
     category = ComplianceRule.Category.SECURITY
     severity = ComplianceRule.Severity.CRITICAL
-    requires_file_scan = True
+    requires_file_scan = False
 
     def evaluate(self, context: RuleContext):
-        # Simplified naive secret detection for illustration
-        patterns = {
-            'aws_key': r'AKIA[0-9A-Z]{16}',
-            'generic_secret': r'(?i)(password|secret|token|api_key)\s*[:=]\s*["\'][a-zA-Z0-9_\-]{16,}["\']'
-        }
+        from security.models import Finding
+        secrets = Finding.objects.filter(
+            snapshot=context.snapshot, 
+            category=Finding.Category.SECRET,
+            status=Finding.Status.OPEN
+        )
         
-        findings = []
-        for root, dirs, files in os.walk(context.repo_path):
-            if '.git' in root: continue
-            for file in files:
-                filepath = os.path.join(root, file)
-                rel_path = os.path.relpath(filepath, context.repo_path)
-                
-                # Skip large or binary files
-                if os.path.getsize(filepath) > 1024 * 1024: continue
-                
-                try:
-                    with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
-                        for i, line in enumerate(f):
-                            for key, pat in patterns.items():
-                                if re.search(pat, line):
-                                    findings.append({
-                                        'file': rel_path,
-                                        'line': i + 1,
-                                        'type': key,
-                                        'value': '[REDACTED]'
-                                    })
-                                    break
-                except:
-                    pass
-                    
-        evidence = {'secrets_found': len(findings), 'findings': findings[:10]} # Limit findings
-        if findings:
+        evidence = {'secrets_found': secrets.count(), 'findings': [f.short_description for f in secrets[:5]]}
+        if secrets.exists():
             return self._fail(evidence, remediation="Remove secrets from history, revoke them, and use environment variables.", critical=True)
         return self._pass(evidence)
 
@@ -329,12 +293,20 @@ class PIIDetectionRule(BaseRule):
     description = 'Scans for potential Personally Identifiable Information.'
     category = ComplianceRule.Category.SECURITY
     severity = ComplianceRule.Severity.WARNING
-    requires_file_scan = True
+    requires_file_scan = False
 
     def evaluate(self, context: RuleContext):
-        findings = []
-        evidence = {'pii_found': 0, 'findings': findings}
-        return self._pass(evidence) # Simplified for brevity, relying on standard passes unless explicitly found.
+        from security.models import Finding
+        pii = Finding.objects.filter(
+            snapshot=context.snapshot, 
+            category=Finding.Category.PII,
+            status=Finding.Status.OPEN
+        )
+        
+        evidence = {'pii_found': pii.count(), 'findings': [f.short_description for f in pii[:5]]}
+        if pii.exists():
+            return self._warning(evidence, remediation="Ensure real PII is not hardcoded.")
+        return self._pass(evidence)
 
 class AIGeneratedRule(BaseRule):
     rule_id = 'ai_generated_code'

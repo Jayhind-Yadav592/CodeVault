@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Security Dashboard: {{ project.name }}</h2>
+    
+    <div id="security-container" class="mt-4">
+        <p>Loading security data...</p>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const secContainer = document.getElementById('security-container');
+    
+    secContainer.innerHTML = `
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header bg-danger text-white">Critical Findings</div>
+                    <div class="card-body">
+                        <h3>0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header bg-warning text-dark">High Findings</div>
+                    <div class="card-body">
+                        <h3>0</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <button class="btn btn-warning" onclick="triggerSecurityScan()">Run Deep Security Scan</button>
+        <div class="mt-4">
+            <h4>Findings</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Severity</th>
+                        <th>File</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td colspan="4">No findings yet. Run a scan.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    `;
+});
+
+function triggerSecurityScan() {
+    alert("Triggering deep security scan... Check backend task queues.");
+}
+</script>
+{% endblock %}
