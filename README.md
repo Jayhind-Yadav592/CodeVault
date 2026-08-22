@@ -51,6 +51,15 @@ Phase 3 introduces the core engine for scanning, classifying, and extracting met
 - **Immutable Snapshots**: Generates immutable `AnalysisSnapshot` records for auditable historical comparisons of a project's scale over time.
 - **Asynchronous Execution**: Powered natively by `django-q2`, avoiding external broker dependencies like Redis to guarantee clean execution across all environments (including Windows).
 
+## Phase 4: Compliance, Eligibility & Quality Evaluation Engine
+
+Phase 4 introduces a dynamic, modular rule engine that validates repository snapshots against CodeVault/TrainPlex policies.
+- **Configurable Policies**: Weighted scoring, threshold management (e.g., 50k LOC, 5 commits).
+- **Deep Repository Scanning**: Specialized scanners re-clone snapshots asynchronously to inspect for PII, secrets, prohibited open-source licenses, test coverage, and documentation.
+- **Secret Redaction & Security**: Findings are structurally redacted before persistence. The engine guarantees plaintext secrets never touch the database.
+- **Transparent Scoring & Decision Matrix**: Rules produce verifiable `RuleResult` evidence, culminating in explicit categorizations (`ELIGIBLE`, `REQUIRES_HUMAN_REVIEW`, etc.) with actionable remediations.
+- **API & UI**: Provides detailed requirement matrices via the Compliance Dashboard and DRF APIs.
+
 ## Requirements
 
 - Python 3.11+

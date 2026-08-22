@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Compliance Dashboard: {{ project.name }}</h2>
+    
+    <div id="evaluation-container" class="mt-4">
+        <p>Loading compliance data...</p>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const evalContainer = document.getElementById('evaluation-container');
+    
+    // In a real app we'd fetch the latest evaluation from the API
+    // For now, this is a placeholder UI
+    evalContainer.innerHTML = `
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">Overview</div>
+                    <div class="card-body">
+                        <h3>Score: <span id="overall-score">--</span></h3>
+                        <p>Decision: <strong id="decision-text">--</strong></p>
+                        <hr>
+                        <ul class="list-unstyled">
+                            <li>Passed: <span id="passed-count" class="text-success">0</span></li>
+                            <li>Failed: <span id="failed-count" class="text-danger">0</span></li>
+                            <li>Warnings: <span id="warnings-count" class="text-warning">0</span></li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="triggerEvaluation()">Run New Evaluation</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Requirement Matrix</div>
+                    <div class="card-body">
+                        <table class="table" id="rules-table">
+                            <thead>
+                                <tr>
+                                    <th>Requirement</th>
+                                    <th>Status</th>
+                                    <th>Remediation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="3">No evaluation run yet.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+});
+
+function triggerEvaluation() {
+    alert("Triggering evaluation via API... (Check backend logs for progress)");
+}
+</script>
+{% endblock %}

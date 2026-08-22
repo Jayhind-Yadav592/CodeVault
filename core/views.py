@@ -15,9 +15,14 @@ def dashboard(request):
         profile = request.user.developer_profile
     except DeveloperProfile.DoesNotExist:
         profile = None
+    return render(request, 'core/dashboard.html', {'projects': projects, 'profile': profile})
 
-    context = {
-        'projects': projects,
-        'profile': profile,
-    }
-    return render(request, 'core/dashboard.html', context)
+@login_required
+def project_compliance(request, project_id):
+    project = request.user.owned_projects.get(id=project_id)
+    return render(request, 'core/compliance.html', {'project': project})
+
+@login_required
+def project_repository(request, project_id):
+    project = request.user.owned_projects.get(id=project_id)
+    return render(request, 'core/repository.html', {'project': project})
