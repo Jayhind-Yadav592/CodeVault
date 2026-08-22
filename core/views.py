@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from projects.models import Project
 from developers.models import DeveloperProfile
@@ -103,3 +104,9 @@ def org_workspace_dashboard(request, org_id):
 @login_required
 def project_workspace_dashboard(request, project_id):
     return render(request, 'core/workspace/project_dashboard.html', {'project_id': project_id})
+
+@login_required
+def admin_intelligence_dashboard(request):
+    if not request.user.is_staff:
+        return HttpResponseForbidden()
+    return render(request, 'core/admin/intelligence_dashboard.html')

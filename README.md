@@ -126,7 +126,13 @@ A robust internal collaborative workspace mapping technical operators to project
 - **Compliance-Aware Releases**: Exposes semantic `ProjectRelease` objects that directly tie abstract version numbers (e.g., v1.4) back to a mathematically immutable Git `AnalysisSnapshot`.
 - **Security Boundaries**: Protected comprehensively by custom DRF Permission blocks (`IsProjectMember`, `IsOrganizationAdmin`) guaranteeing Absolute IDOR (Insecure Direct Object Reference) isolation across projects.
 
-## Requirements
+## Phase 14: AI Repository Intelligence & ML Evaluation Platform
+
+CodeVault features a modular AI/ML subsystem that enforces dataset integrity and absolute decision transparency, avoiding black-box assertions.
+- **Explainable AI Pipeline**: Introduces immutable `FeatureVector`s parsed deterministically from Git and Compliance operations. Every `Prediction` persists an `explanation` payload mapping directly back to contributing features (e.g., test ratio or security findings count).
+- **Anti-Leakage Data Management**: The `DatasetSplit` topology enforces absolute boundaries between `TRAIN`, `VALIDATION`, and `TEST` sets at the ORM level, guaranteeing test-set contamination cannot occur natively.
+- **Strict Model Promotion Workflow**: `ModelRegistry` records enforce a strict lifecycle (`EXPERIMENT` -> `PRODUCTION`). The `InferenceService` structurally rejects any attempts to compute predictions utilizing non-production models.
+- **Anti-Hallucination Constraints**: The integrated `ReviewAssistantService` generates human-readable repository summaries using direct deterministic bindings to the underlying database rather than generative language models, preventing hallucinatory claims.
 
 - Python 3.11+
 - PostgreSQL 14+ (for production)
