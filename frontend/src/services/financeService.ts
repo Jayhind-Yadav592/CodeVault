@@ -3,7 +3,7 @@ import type { FinanceDashboardData } from '../types/finance';
 
 export const financeService = {
   getData: async (): Promise<{ results: FinanceDashboardData[] }> => {
-    const response = await api.get('/finance/');
+    const response = await api.get('/finance/transactions/');
     return response.data;
   }
 };

@@ -1,3 +1,9 @@
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+@api_view(["GET"])
+def api_root(request, format=None):
+    return Response({"message": "Welcome to CodeVault API v1"})
 from django.contrib import admin
 from django.urls import path, include
 from core.views import home, dashboard, project_compliance, project_repository, project_security, project_reviews, reviewer_dashboard
@@ -30,6 +36,7 @@ urlpatterns = [
     path('admin/data/', core.views.admin_data_dashboard, name='admin_data'),
     path('integrations/credentials/', core.views.api_credentials_view, name='api_credentials'),
     path('integrations/webhooks/', core.views.webhooks_view, name='webhooks'),
+    path('api/v1/', api_root, name='api_root'),
     path('api/v1/accounts/', include('accounts.urls', namespace='accounts')),
     path('api/v1/developers/', include('developers.urls', namespace='developers')),
     path('api/v1/projects/', include('projects.urls', namespace='projects')),

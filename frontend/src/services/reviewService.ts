@@ -3,7 +3,7 @@ import type { ReviewCenterData } from '../types/review';
 
 export const reviewService = {
   getData: async (): Promise<{ results: ReviewCenterData[] }> => {
-    const response = await api.get('/review/');
+    const response = await api.get('/review/reviewcases/');
     return response.data;
   }
 };
