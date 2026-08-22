@@ -1,0 +1,6 @@
+export interface IncidentDashboardData {
+    id: string;
+    name: string;
+    status: string;
+    created_at: string;
+}

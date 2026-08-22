@@ -25,6 +25,15 @@ export const AuthenticatedLayout = () => {
             <div className="pt-4 pb-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">Compliance</div>
             <li><Link to="/compliance" className="block p-2 hover:bg-blue-50 text-gray-700 hover:text-blue-700 rounded font-medium">Dashboard</Link></li>
             <li><Link to="/compliance/rules" className="block p-2 hover:bg-blue-50 text-gray-700 hover:text-blue-700 rounded font-medium">Rule Registry</Link></li>
+            <li><Link to="/security" className="block p-2 hover:bg-blue-50 text-gray-700 hover:text-blue-700 rounded font-medium">Security</Link></li>
+            <li><Link to="/review" className="block p-2 hover:bg-blue-50 text-gray-700 hover:text-blue-700 rounded font-medium">Review</Link></li>
+            <li><Link to="/licensing" className="block p-2 hover:bg-blue-50 text-gray-700 hover:text-blue-700 rounded font-medium">Licensing</Link></li>
+            <li><Link to="/marketplace" className="block p-2 hover:bg-blue-50 text-gray-700 hover:text-blue-700 rounded font-medium">Marketplace</Link></li>
+            <li><Link to="/finance" className="block p-2 hover:bg-blue-50 text-gray-700 hover:text-blue-700 rounded font-medium">Finance</Link></li>
+            <li><Link to="/analytics" className="block p-2 hover:bg-blue-50 text-gray-700 hover:text-blue-700 rounded font-medium">Analytics</Link></li>
+            <li><Link to="/governance" className="block p-2 hover:bg-blue-50 text-gray-700 hover:text-blue-700 rounded font-medium">Governance</Link></li>
+            <li><Link to="/workflow" className="block p-2 hover:bg-blue-50 text-gray-700 hover:text-blue-700 rounded font-medium">Workflow</Link></li>
+            <li><Link to="/incident" className="block p-2 hover:bg-blue-50 text-gray-700 hover:text-blue-700 rounded font-medium">Incident</Link></li>
           </ul>
         </aside>
         <main className="flex-1 p-8 overflow-y-auto">

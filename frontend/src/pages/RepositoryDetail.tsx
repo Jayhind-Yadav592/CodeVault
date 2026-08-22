@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { repositoryService } from '../services/repositoryService';
 import type { RepositoryConnection, AnalysisSnapshot, TrainPlexReadiness } from '../types/repository';
