@@ -134,6 +134,16 @@ CodeVault features a modular AI/ML subsystem that enforces dataset integrity and
 - **Strict Model Promotion Workflow**: `ModelRegistry` records enforce a strict lifecycle (`EXPERIMENT` -> `PRODUCTION`). The `InferenceService` structurally rejects any attempts to compute predictions utilizing non-production models.
 - **Anti-Hallucination Constraints**: The integrated `ReviewAssistantService` generates human-readable repository summaries using direct deterministic bindings to the underlying database rather than generative language models, preventing hallucinatory claims.
 
+## Phase 15: Enterprise Governance, Risk & Policy Management
+
+CodeVault features a full GRC (Governance, Risk, and Compliance) layer permitting organizations to manage risk and enforce policies without tangling compliance logic directly into codebase operations.
+- **Immutable Policy Lifecycle**: The `PolicyWorkflowService` ensures that once a `PolicyVersion` reaches `ACTIVE` status, it cannot be modified. Historical `ControlEvaluation`s retain references to the exact policy active at that point in time.
+- **Time-Bounded Exceptions**: The `ExceptionManagerService` strictly enforces expiration dates on policy exceptions. Upon expiration, a control automatically downgrades to failing, preventing temporary waivers from becoming permanent backdoors.
+- **Evidence-Based Evaluation**: Controls (`Control`) and their corresponding outcomes (`ControlEvaluation`) map many-to-many to concrete `Evidence` artifacts (like a security scan ID or manual reviewer approval). This structure avoids claiming regulatory compliance off simple automated tests alone.
+- **Deterministic Risk Engine**: The `Risk` register computes straightforward deterministic scores (Likelihood * Impact) rather than relying on obfuscated algorithms, enabling transparent risk treatment (Mitigate, Accept, Transfer, Avoid).
+
+## Requirements
+
 - Python 3.11+
 - PostgreSQL 14+ (for production)
 

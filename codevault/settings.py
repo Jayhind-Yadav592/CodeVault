@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'marketplace',
     'collaboration',
     'intelligence',
+    'governance',
 ]
 
 MIDDLEWARE = [
