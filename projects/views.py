@@ -51,26 +51,27 @@ class ProjectViewSet(viewsets.ModelViewSet):
         rejected_projects = projects.filter(state=Project.State.REJECTED).count()
         
         # Repositories Summary
-        from repositories.models import Repository
-        repos = Repository.objects.filter(project__owner=user)
+        from repositories.models import RepositoryConnection, AnalysisJob
+        repos = RepositoryConnection.objects.filter(project__owner=user)
         connected_repos = repos.count()
-        pending_analysis = repos.filter(analysis_status='pending').count()
-        completed_analysis = repos.filter(analysis_status='completed').count()
-        failed_analysis = repos.filter(analysis_status='failed').count()
+        jobs = AnalysisJob.objects.filter(repository__project__owner=user)
+        pending_analysis = jobs.filter(state__in=['queued', 'running']).count()
+        completed_analysis = jobs.filter(state='completed').count()
+        failed_analysis = jobs.filter(state='failed').count()
         
         # Compliance Summary
-        from compliance.models import ProjectEvaluation
-        evals = ProjectEvaluation.objects.filter(project__owner=user).order_by('-evaluated_at')
+        from compliance.models import ComplianceEvaluation
+        evals = ComplianceEvaluation.objects.filter(snapshot__repository__project__owner=user)
         # Simulate distinct('project') for sqlite
         seen = set()
         unique_evals = []
         for e in evals:
-            if e.project_id not in seen:
-                seen.add(e.project_id)
+            if e.snapshot.repository.project_id not in seen:
+                seen.add(e.snapshot.repository.project_id)
                 unique_evals.append(e)
                 
-        passing_evals = sum(1 for e in unique_evals if e.status == 'pass')
-        failed_evals = sum(1 for e in unique_evals if e.status == 'fail')
+        passing_evals = sum(1 for e in unique_evals if e.decision == 'pass')
+        failed_evals = sum(1 for e in unique_evals if e.decision == 'fail')
         
         # Security Summary
         from security.models import Finding
@@ -80,7 +81,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
         
         # Activity
         from audit.models import AuditLog
-        activity = AuditLog.objects.filter(user=user).order_by('-timestamp')[:5]
+        activity = AuditLog.objects.filter(user=user).order_by('-created_at')[:5]
         
         return Response({
             'projects': {
@@ -106,7 +107,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
                 'open': findings.count()
             },
             'recent_activity': [
-                {'action': a.action, 'resource': a.resource_type, 'timestamp': a.timestamp}
+                {'action': a.action, 'resource': a.resource_type, 'timestamp': a.created_at}
                 for a in activity
             ]
         })
