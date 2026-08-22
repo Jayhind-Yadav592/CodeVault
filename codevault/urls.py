@@ -9,5 +9,6 @@ urlpatterns = [
     path('api/v1/accounts/', include('accounts.urls', namespace='accounts')),
     path('api/v1/developers/', include('developers.urls', namespace='developers')),
     path('api/v1/projects/', include('projects.urls', namespace='projects')),
+    path('api/v1/repositories/', include('repositories.urls', namespace='repositories')),
     path('api/v1/notifications/', include('notifications.urls', namespace='notifications')),
 ]

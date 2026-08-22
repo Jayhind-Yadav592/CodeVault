@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'django_filters',
+    'django_q',
     
     # Local apps
     'core',
@@ -221,3 +222,19 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True') == 'True'
 DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_FROM_ADDRESS', 'noreply@codevault.local')
+
+# Django Q2 Configuration
+Q_CLUSTER = {
+    'name': 'codevault',
+    'workers': 4,
+    'recycle': 500,
+    'timeout': 1800, # 30 minutes for large repo analysis
+    'retry': 1860,
+    'compress': True,
+    'save_limit': 250,
+    'queue_limit': 500,
+    'cpu_affinity': 1,
+    'label': 'Django Q',
+    'orm': 'default', # Use Django ORM as broker
+}
+

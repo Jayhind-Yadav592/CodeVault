@@ -1,0 +1,46 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Repository Overview - CodeVault{% endblock %}
+
+{% block content %}
+<h2>Repository Overview for {{ project.name }}</h2>
+<hr>
+
+{% if connection %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">Connection Details</div>
+            <div class="card-body">
+                <p><strong>Provider:</strong> {{ connection.get_provider_display }}</p>
+                <p><strong>URL:</strong> {{ connection.repo_url }}</p>
+                <p><strong>Status:</strong> <span class="badge bg-secondary">{{ connection.get_status_display }}</span></p>
+                <p><strong>Last Sync:</strong> {{ connection.last_sync_time|default:"Never" }}</p>
+                <form action="{% url 'api:repositories:connection-sync' connection.id %}" method="post" id="syncForm">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Sync Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        {% if latest_snapshot %}
+        <div class="card mb-4">
+            <div class="card-header">Latest Analysis ({{ latest_snapshot.created_at|date:"M d, Y" }})</div>
+            <div class="card-body">
+                <p><strong>Total Files:</strong> {{ latest_snapshot.total_files }}</p>
+                <p><strong>Meaningful LOC:</strong> {{ latest_snapshot.meaningful_loc }}</p>
+                <p><strong>Total Commits:</strong> {{ latest_snapshot.total_commits }}</p>
+                <p><strong>Meaningful Commits:</strong> {{ latest_snapshot.meaningful_commits }}</p>
+            </div>
+        </div>
+        {% else %}
+        <div class="alert alert-info">No analysis snapshot available yet.</div>
+        {% endif %}
+    </div>
+</div>
+{% else %}
+<div class="alert alert-warning">No repository connected to this project.</div>
+{% endif %}
+{% endblock %}

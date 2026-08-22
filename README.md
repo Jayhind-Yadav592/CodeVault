@@ -43,6 +43,14 @@ Phase 2 introduces a complete Developer and Software Project Management subsyste
 - **RBAC APIs**: Strict cross-user data isolation via `IsProjectOwner` permissions.
 - **Search & Filter**: Powerful querying capabilities via `django-filter` integration.
 
+## Phase 3: Repository Integration & Intelligence Engine
+
+Phase 3 introduces the core engine for scanning, classifying, and extracting metadata from Git repositories.
+- **Git Integration Engine**: Safe, full-fidelity interaction with local and remote Git repositories using `GitPython`.
+- **Code Classifier & LOC Analyzer**: Fast, heuristic-based categorization of source, binary, documentation, and dependency files. Extracts granular line-of-code statistics (total, code, blank, comments) supporting over 30 languages.
+- **Immutable Snapshots**: Generates immutable `AnalysisSnapshot` records for auditable historical comparisons of a project's scale over time.
+- **Asynchronous Execution**: Powered natively by `django-q2`, avoiding external broker dependencies like Redis to guarantee clean execution across all environments (including Windows).
+
 ## Requirements
 
 - Python 3.11+
