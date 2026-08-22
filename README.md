@@ -76,6 +76,13 @@ Phase 6 implements the authoritative human-in-the-loop workflow, bridging automa
 - **Automated Gateway Blocking**: The system physically prevents Final Approval if critical security findings or compliance policy rules are unresolved, acting as an immutable guardrail against human error.
 - **Remediation Lifecycle**: Connects developer fixes to follow-up analysis snapshots, allowing seamless re-evaluation cycles.
 
+## Phase 7: Licensing, Agreements & Contract Lifecycle
+
+Phase 7 introduces the legal and commercial abstraction framework, bridging technical repository ownership with legally sound, non-exclusive market availability.
+- **Contract Orchestration**: Enforces non-exclusive terms structurally. Active terms are immutable, meaning any changes spawn versioned amendments. 
+- **KYC & Signature Guardrails**: Projects logically cannot reach the `ACTIVE` agreement state until the requesting `Organization` is fully verified and cryptographic (abstracted) `SignatureRequest` criteria are met.
+- **Decimals & Negotiation**: Financial pricing models strictly utilize `DecimalField` for calculation safety. The `NegotiationProposal` framework securely tracks multi-party counteroffers.
+
 ## Requirements
 
 - Python 3.11+

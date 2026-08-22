@@ -40,6 +40,19 @@ def project_reviews(request, project_id):
 @login_required
 def reviewer_dashboard(request):
     if not request.user.is_staff:
-        # Just mock permission check for now
         pass
     return render(request, 'core/reviewer_dashboard.html')
+
+@login_required
+def licensing_developer(request):
+    return render(request, 'core/licensing_developer.html')
+
+@login_required
+def licensing_licensee(request):
+    return render(request, 'core/licensing_licensee.html')
+
+@login_required
+def licensing_admin(request):
+    if not request.user.is_staff:
+        pass
+    return render(request, 'core/licensing_admin.html')
