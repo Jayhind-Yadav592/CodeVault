@@ -83,6 +83,13 @@ Phase 7 introduces the legal and commercial abstraction framework, bridging tech
 - **KYC & Signature Guardrails**: Projects logically cannot reach the `ACTIVE` agreement state until the requesting `Organization` is fully verified and cryptographic (abstracted) `SignatureRequest` criteria are met.
 - **Decimals & Negotiation**: Financial pricing models strictly utilize `DecimalField` for calculation safety. The `NegotiationProposal` framework securely tracks multi-party counteroffers.
 
+## Phase 8: Finance, KYC, Payouts & Revenue Management
+
+Phase 8 acts as the mathematically airtight transaction orchestrator, processing revenue and paying out creators while avoiding any floating-point liabilities.
+- **Double-Entry Engine**: Transactions are atomic and only commit if debits explicitly match credits across logical `LedgerAccount`s.
+- **Idempotency Execution**: Concurrency-safe APIs ignore duplicate transaction intents relying on uniquely enforced `idempotency_key`s.
+- **Verification Blocking**: The system explicitly halts payout processing if the attached entity lacks full organizational KYC verifications from the prior Phase.
+
 ## Requirements
 
 - Python 3.11+

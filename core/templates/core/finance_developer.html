@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Developer Revenue Dashboard</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-success text-white">Available Balance</div>
+                <div class="card-body"><h3>$0.00</h3></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-warning">Pending Earnings</div>
+                <div class="card-body"><h3>$0.00</h3></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-info text-white">Total Paid Out</div>
+                <div class="card-body"><h3>$0.00</h3></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-4">
+        <h4>Recent Transactions</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Gross</th>
+                    <th>Fee</th>
+                    <th>Net</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td colspan="6">No transactions yet.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

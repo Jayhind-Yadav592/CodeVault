@@ -56,3 +56,13 @@ def licensing_admin(request):
     if not request.user.is_staff:
         pass
     return render(request, 'core/licensing_admin.html')
+
+@login_required
+def finance_developer(request):
+    return render(request, 'core/finance_developer.html')
+
+@login_required
+def finance_admin(request):
+    if not request.user.is_staff:
+        pass
+    return render(request, 'core/finance_admin.html')

@@ -15,6 +15,8 @@ urlpatterns = [
     path('licensing/developer/', core.views.licensing_developer, name='licensing_developer'),
     path('licensing/licensee/', core.views.licensing_licensee, name='licensing_licensee'),
     path('licensing/admin/', core.views.licensing_admin, name='licensing_admin'),
+    path('finance/developer/', core.views.finance_developer, name='finance_developer'),
+    path('finance/admin/', core.views.finance_admin, name='finance_admin'),
     path('api/v1/accounts/', include('accounts.urls', namespace='accounts')),
     path('api/v1/developers/', include('developers.urls', namespace='developers')),
     path('api/v1/projects/', include('projects.urls', namespace='projects')),
@@ -23,5 +25,6 @@ urlpatterns = [
     path('api/v1/security/', include('security.urls', namespace='security')),
     path('api/v1/reviews/', include('reviews.urls', namespace='reviews')),
     path('api/v1/licensing/', include('licensing.urls', namespace='licensing')),
+    path('api/v1/finance/', include('finance.urls', namespace='finance')),
     path('api/v1/notifications/', include('notifications.urls', namespace='notifications')),
 ]
