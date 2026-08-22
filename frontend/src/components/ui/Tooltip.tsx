@@ -8,7 +8,7 @@ export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const Tooltip: React.FC<TooltipProps> = ({ children, className, variant = 'primary', disabled, ...props }) => {
     return (
-        <div className={cn('base-style', variant, disabled && 'opacity-50', className)} {...props}>
+        <div className={cn('base-style', variant, disabled && 'opacity-100', className)} {...props}>
             {children}
         </div>
     );

@@ -42,7 +42,7 @@ export const RepositoryList: React.FC = () => {
                 <TableRow key={r.id}>
                   <TableCell>
                     <div className="font-medium">{r.repo_url}</div>
-                    <div className="text-sm text-gray-500">{r.default_branch}</div>
+                    <div className="text-sm text-gray-900">{r.default_branch}</div>
                   </TableCell>
                   <TableCell className="capitalize">{r.provider}</TableCell>
                   <TableCell>
@@ -57,7 +57,7 @@ export const RepositoryList: React.FC = () => {
               ))}
               {repos.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={4}><div className="py-6 text-center text-gray-500">No repositories connected.</div></TableCell>
+                  <TableCell colSpan={4}><div className="py-6 text-center text-gray-900">No repositories connected.</div></TableCell>
                 </TableRow>
               )}
             </tbody>

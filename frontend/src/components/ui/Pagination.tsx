@@ -8,7 +8,7 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const Pagination: React.FC<PaginationProps> = ({ children, className, variant = 'primary', disabled, ...props }) => {
     return (
-        <div className={cn('base-style', variant, disabled && 'opacity-50', className)} {...props}>
+        <div className={cn('base-style', variant, disabled && 'opacity-100', className)} {...props}>
             {children}
         </div>
     );

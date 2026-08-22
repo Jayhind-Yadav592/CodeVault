@@ -30,7 +30,7 @@ export const ComplianceDashboard = () => {
         <Card><CardHeader>Failed</CardHeader><CardContent className="text-2xl font-bold text-red-600">{data.failed}</CardContent></Card>
         <Card><CardHeader>Partial</CardHeader><CardContent className="text-2xl font-bold text-yellow-600">{data.partial}</CardContent></Card>
         <Card><CardHeader>Manual</CardHeader><CardContent className="text-2xl font-bold text-blue-600">{data.manual_review}</CardContent></Card>
-        <Card><CardHeader>Unknown</CardHeader><CardContent className="text-2xl font-bold text-gray-500">{data.unknown}</CardContent></Card>
+        <Card><CardHeader>Unknown</CardHeader><CardContent className="text-2xl font-bold text-gray-900">{data.unknown}</CardContent></Card>
       </div>
 
       <Card>

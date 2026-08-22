@@ -68,8 +68,8 @@ export const RepositoryDetail: React.FC = () => {
       </div>
 
       <div className="flex gap-4 border-b overflow-x-auto">
-        <button onClick={() => setTab('overview')} className={`px-4 py-2 ${tab === 'overview' ? 'border-b-2 border-blue-600 font-medium text-blue-600' : 'text-gray-500'}`}>Overview & Git</button>
-        <button onClick={() => setTab('readiness')} className={`px-4 py-2 ${tab === 'readiness' ? 'border-b-2 border-blue-600 font-medium text-blue-600' : 'text-gray-500'}`}>TrainPlex Readiness</button>
+        <button onClick={() => setTab('overview')} className={`px-4 py-2 ${tab === 'overview' ? 'border-b-2 border-blue-600 font-medium text-blue-600' : 'text-gray-900'}`}>Overview & Git</button>
+        <button onClick={() => setTab('readiness')} className={`px-4 py-2 ${tab === 'readiness' ? 'border-b-2 border-blue-600 font-medium text-blue-600' : 'text-gray-900'}`}>TrainPlex Readiness</button>
       </div>
 
       {tab === 'overview' && (
@@ -109,14 +109,14 @@ export const RepositoryDetail: React.FC = () => {
                 <div className="flex justify-between items-center border-b pb-2">
                   <span>Minimum 50,000 LOC</span>
                   <div className="flex items-center gap-2">
-                    <span className="text-sm text-gray-500">Actual: {readiness.size.value}</span>
+                    <span className="text-sm text-gray-900">Actual: {readiness.size.value}</span>
                     <Badge variant={readiness.size.status === 'PASS' ? 'success' : 'danger'}>{readiness.size.status}</Badge>
                   </div>
                 </div>
                 <div className="flex justify-between items-center border-b pb-2">
                   <span>5+ Meaningful Commits</span>
                   <div className="flex items-center gap-2">
-                    <span className="text-sm text-gray-500">Actual: {readiness.commits.value}</span>
+                    <span className="text-sm text-gray-900">Actual: {readiness.commits.value}</span>
                     <Badge variant={readiness.commits.status === 'PASS' ? 'success' : 'danger'}>{readiness.commits.status}</Badge>
                   </div>
                 </div>

@@ -37,9 +37,9 @@ export const ProjectDetail: React.FC = () => {
       
       <div className="flex gap-4 border-b">
         <div className="px-4 py-2 border-b-2 border-blue-600 text-blue-600 font-medium">Overview</div>
-        <div className="px-4 py-2 text-gray-500 cursor-not-allowed">Repository</div>
-        <div className="px-4 py-2 text-gray-500 cursor-not-allowed">Team</div>
-        <div className="px-4 py-2 text-gray-500 cursor-not-allowed">Settings</div>
+        <div className="px-4 py-2 text-gray-900 cursor-not-allowed">Repository</div>
+        <div className="px-4 py-2 text-gray-900 cursor-not-allowed">Team</div>
+        <div className="px-4 py-2 text-gray-900 cursor-not-allowed">Settings</div>
       </div>
 
       <div className="grid grid-cols-3 gap-6 mt-6">
@@ -56,11 +56,11 @@ export const ProjectDetail: React.FC = () => {
             <CardHeader>Details</CardHeader>
             <CardContent className="space-y-2">
               <div className="flex justify-between">
-                <span className="text-gray-500">Created:</span>
+                <span className="text-gray-900">Created:</span>
                 <span>{new Date(project.created_at).toLocaleDateString()}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-500">Updated:</span>
+                <span className="text-gray-900">Updated:</span>
                 <span>{new Date(project.updated_at).toLocaleDateString()}</span>
               </div>
             </CardContent>

@@ -38,7 +38,7 @@ export const ComplianceRules = () => {
                 <TableCell className="font-mono text-sm">{r.rule_id}</TableCell>
                 <TableCell>
                   <div className="font-medium">{r.name}</div>
-                  <div className="text-sm text-gray-500">{r.description}</div>
+                  <div className="text-sm text-gray-900">{r.description}</div>
                 </TableCell>
                 <TableCell><Badge variant="default">{r.category}</Badge></TableCell>
                 <TableCell><Badge variant={r.severity === 'critical' ? 'danger' : r.severity === 'warning' ? 'warning' : 'success'}>{r.severity}</Badge></TableCell>

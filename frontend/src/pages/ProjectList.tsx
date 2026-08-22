@@ -71,7 +71,7 @@ export const ProjectList: React.FC = () => {
                 <TableRow key={p.id}>
                   <TableCell>
                     <div className="font-medium text-gray-900">{p.name}</div>
-                    <div className="text-sm text-gray-500">{p.short_description}</div>
+                    <div className="text-sm text-gray-900">{p.short_description}</div>
                   </TableCell>
                   <TableCell>{p.primary_language}</TableCell>
                   <TableCell>
@@ -85,7 +85,7 @@ export const ProjectList: React.FC = () => {
               {projects.length === 0 && (
                 <TableRow>
                   <TableCell colSpan={4}>
-                    <div className="text-center py-8 text-gray-500">No projects found.</div>
+                    <div className="text-center py-8 text-gray-900">No projects found.</div>
                   </TableCell>
                 </TableRow>
               )}

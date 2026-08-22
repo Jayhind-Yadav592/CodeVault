@@ -34,7 +34,7 @@ export const Dashboard: React.FC = () => {
           <CardHeader>Projects</CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">{data.projects.total}</div>
-            <div className="text-sm text-gray-500">Active: {data.projects.active} | Approved: {data.projects.approved}</div>
+            <div className="text-sm text-gray-900">Active: {data.projects.active} | Approved: {data.projects.approved}</div>
           </CardContent>
         </Card>
         
@@ -42,7 +42,7 @@ export const Dashboard: React.FC = () => {
           <CardHeader>Repositories</CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">{data.repositories.connected}</div>
-            <div className="text-sm text-gray-500">Pending: {data.repositories.pending}</div>
+            <div className="text-sm text-gray-900">Pending: {data.repositories.pending}</div>
           </CardContent>
         </Card>
         
@@ -50,7 +50,7 @@ export const Dashboard: React.FC = () => {
           <CardHeader>Security Findings</CardHeader>
           <CardContent>
             <div className="text-3xl font-bold text-red-600">{data.security.open}</div>
-            <div className="text-sm text-gray-500">Critical: {data.security.critical} | High: {data.security.high}</div>
+            <div className="text-sm text-gray-900">Critical: {data.security.critical} | High: {data.security.high}</div>
           </CardContent>
         </Card>
         
@@ -58,7 +58,7 @@ export const Dashboard: React.FC = () => {
           <CardHeader>Compliance</CardHeader>
           <CardContent>
             <div className="text-3xl font-bold text-green-600">{data.compliance.passing}</div>
-            <div className="text-sm text-gray-500">Failed: {data.compliance.failed}</div>
+            <div className="text-sm text-gray-900">Failed: {data.compliance.failed}</div>
           </CardContent>
         </Card>
       </div>
@@ -70,10 +70,10 @@ export const Dashboard: React.FC = () => {
             {data.recent_activity.map((act, i) => (
               <li key={i} className="text-sm pb-2 border-b last:border-0">
                 <span className="font-medium capitalize">{act.action}</span> on {act.resource} 
-                <span className="text-gray-400 ml-2">{new Date(act.timestamp).toLocaleString()}</span>
+                <span className="text-gray-900 ml-2">{new Date(act.timestamp).toLocaleString()}</span>
               </li>
             ))}
-            {data.recent_activity.length === 0 && <li className="text-gray-500">No recent activity.</li>}
+            {data.recent_activity.length === 0 && <li className="text-gray-900">No recent activity.</li>}
           </ul>
         </CardContent>
       </Card>

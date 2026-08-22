@@ -18,8 +18,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         ref={ref}
-        className={cn(baseStyles, variants[variant], className, isLoading && 'opacity-50 cursor-not-allowed')}
-        disabled={isLoading || props.disabled}
+        className={cn(baseStyles, variants[variant], className, isLoading && 'opacity-100 cursor-not-allowed')}
+        
         {...props}
       >
         {isLoading ? 'Loading...' : children}
