@@ -22,6 +22,7 @@ import { AnalyticsDashboard } from './pages/AnalyticsDashboard';
 import { GovernanceDashboard } from './pages/GovernanceDashboard';
 import { WorkflowDashboard } from './pages/WorkflowDashboard';
 import { IncidentDashboard } from './pages/IncidentDashboard';
+import { Landing } from './pages/Landing';
 
 function App() {
   return (
@@ -58,7 +59,7 @@ function App() {
             <Route path="/admin" element={<div>Admin (WIP)</div>} />
           </Route>
 
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/" element={<Landing />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
