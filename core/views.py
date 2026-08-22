@@ -114,3 +114,9 @@ def admin_intelligence_dashboard(request):
 @login_required
 def org_governance_dashboard(request, org_id):
     return render(request, 'core/admin/governance_dashboard.html', {'org_id': org_id})
+
+@login_required
+def admin_data_dashboard(request):
+    if not request.user.is_staff:
+        return HttpResponseForbidden()
+    return render(request, 'core/admin/data_dashboard.html')

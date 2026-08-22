@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'collaboration',
     'intelligence',
     'governance',
+    'data_platform',
 ]
 
 MIDDLEWARE = [

@@ -142,6 +142,13 @@ CodeVault features a full GRC (Governance, Risk, and Compliance) layer permittin
 - **Evidence-Based Evaluation**: Controls (`Control`) and their corresponding outcomes (`ControlEvaluation`) map many-to-many to concrete `Evidence` artifacts (like a security scan ID or manual reviewer approval). This structure avoids claiming regulatory compliance off simple automated tests alone.
 - **Deterministic Risk Engine**: The `Risk` register computes straightforward deterministic scores (Likelihood * Impact) rather than relying on obfuscated algorithms, enabling transparent risk treatment (Mitigate, Accept, Transfer, Avoid).
 
+## Phase 16: Data Platform, Event Sourcing & Advanced Analytics
+
+CodeVault implements a decoupled, append-only Event Sourcing and Data Warehouse subsystem to handle analytical and search scale without affecting operational throughput.
+- **Immutable Domain Events**: Core actions dispatch `DomainEvent` objects structured with a correlation ID, causation ID, and generic payload. Events are strictly locked at the ORM layer (raising `ValidationError` on modifications) to guarantee undeniable audit trails.
+- **Idempotent Consumers & DLQ**: A consumer framework tracks execution against a `ConsumerCheckpoint`. Events that trigger exceptions are automatically safely parked in an `EventProcessingError` Dead Letter Queue (DLQ) for admin review and replay. Consumers guarantee idempotency, ensuring that replays (e.g., `license.activated`) do not duplicate financial tracking.
+- **Star-Schema Projections**: To power robust querying and dashboarding, raw events are asynchronously projected into Dimensional (`DimProject`, `DimDate`) and Fact (`FactLicense`, `FactRepositoryAnalysis`) tables.
+
 ## Requirements
 
 - Python 3.11+
