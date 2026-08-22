@@ -30,40 +30,40 @@ export const Dashboard: React.FC = () => {
       <h1 className="text-2xl font-bold">Dashboard</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card>
+        <Card gradientTop>
           <CardHeader>Projects</CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{data.projects.total}</div>
-            <div className="text-sm text-gray-900">Active: {data.projects.active} | Approved: {data.projects.approved}</div>
+            <div className="text-[32px] font-bold">{data.projects.total}</div>
+            <div className="text-[12px] text-slate-500 font-medium mt-1">Active: {data.projects.active} | Approved: {data.projects.approved}</div>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card gradientTop>
           <CardHeader>Repositories</CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{data.repositories.connected}</div>
-            <div className="text-sm text-gray-900">Pending: {data.repositories.pending}</div>
+            <div className="text-[32px] font-bold">{data.repositories.connected}</div>
+            <div className="text-[12px] text-slate-500 font-medium mt-1">Pending: {data.repositories.pending}</div>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card gradientTop>
           <CardHeader>Security Findings</CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-red-600">{data.security.open}</div>
-            <div className="text-sm text-gray-900">Critical: {data.security.critical} | High: {data.security.high}</div>
+            <div className="text-[32px] font-bold text-red-600">{data.security.open}</div>
+            <div className="text-[12px] text-slate-500 font-medium mt-1">Critical: {data.security.critical} | High: {data.security.high}</div>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card gradientTop>
           <CardHeader>Compliance</CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-green-600">{data.compliance.passing}</div>
-            <div className="text-sm text-gray-900">Failed: {data.compliance.failed}</div>
+            <div className="text-[32px] font-bold text-green-600">{data.compliance.passing}</div>
+            <div className="text-[12px] text-slate-500 font-medium mt-1">Failed: {data.compliance.failed}</div>
           </CardContent>
         </Card>
       </div>
 
-      <Card>
+      <Card gradientTop>
         <CardHeader>Recent Activity</CardHeader>
         <CardContent>
           <ul className="space-y-2">

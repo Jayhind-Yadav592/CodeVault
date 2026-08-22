@@ -1,1 +1,62 @@
 @import "tailwindcss";
+
+@theme {
+  --color-lionix-blue: #0052D4;
+  --color-lionix-cyan: #00D2FF;
+  --color-lionix-cyan-highlight: #00F0FF;
+  --color-lionix-bg: #F8FAFC;
+  --color-lionix-ink: #0F172A;
+  --font-inter: "Inter", sans-serif;
+}
+
+body {
+  font-family: var(--font-inter);
+  background: var(--color-lionix-bg);
+  color: var(--color-lionix-ink);
+  overflow-x: hidden;
+}
+
+.bg-canvas {
+  position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none;
+  background: radial-gradient(circle at 50% 0%, #FFFFFF 0%, #F1F5F9 85%);
+}
+.bg-canvas::after {
+  content: ""; position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(0, 210, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 210, 255, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 90%);
+  -webkit-mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 90%);
+  z-index: 1;
+}
+
+.orb {
+  display: block; position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.14; pointer-events: none;
+}
+.orb1 { width: 550px; height: 550px; background: #00D2FF; top: -120px; left: -100px; animation: floatOrb 14s ease-in-out infinite; }
+.orb2 { width: 600px; height: 600px; background: #0052D4; bottom: -150px; right: -100px; animation: floatOrb 18s ease-in-out infinite reverse; }
+.orb3 { width: 400px; height: 400px; background: #4FACFE; top: 45%; left: 35%; animation: floatOrb 16s ease-in-out infinite 2s; }
+
+@keyframes floatOrb {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(35px, 45px); }
+}
+
+.stat-card-gradient::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0052D4, #00D2FF);
+  transform: scaleX(0);
+  transition: transform 0.35s ease;
+  transform-origin: left;
+}
+.stat-card-gradient:hover::before {
+  transform: scaleX(1);
+}
+
+.custom-scrollbar::-webkit-scrollbar { width: 6px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0, 210, 255, 0.4); border-radius: 8px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #00B4E6; }
+.custom-scrollbar { scrollbar-width: thin; scrollbar-color: rgba(0, 210, 255, 0.4) transparent; }
