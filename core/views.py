@@ -86,3 +86,12 @@ def api_credentials_view(request):
 @login_required
 def webhooks_view(request):
     return render(request, 'core/webhooks.html')
+
+def marketplace_home(request):
+    return render(request, 'core/marketplace_home.html')
+
+def marketplace_search(request):
+    return render(request, 'core/marketplace_search.html')
+
+def marketplace_detail(request, pk):
+    return render(request, 'core/marketplace_detail.html', {'pk': pk})

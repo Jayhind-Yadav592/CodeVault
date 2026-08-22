@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'notifications',
     'analytics',
     'integrations',
+    'marketplace',
 ]
 
 MIDDLEWARE = [

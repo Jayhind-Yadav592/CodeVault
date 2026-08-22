@@ -110,6 +110,14 @@ Phase 11 transformed CodeVault into an enterprise-ready system capable of handli
 - **CI/CD Pipeline**: GitHub Actions automatically govern code pushes—running type checks, migration verifications, and Pytest suites against a Postgres matrix.
 - **System Diagnostics**: Built-in CLI operations (`manage.py system_diagnostics`) provide administrators instantaneous audits over double-entry ledger equilibrium and data orphan status.
 
+## Phase 12: Discovery, Search, Marketplace & Recommendation Engine
+
+CodeVault incorporates a robust, privacy-respecting **Marketplace** that allows licensees to discover verified repositories:
+- **Publication Gate**: A strict validator (`PublicationService`) guarantees that only `APPROVED` projects with signed IP ownership and zero critical security findings (like exposed secrets) can be transitioned to a `PUBLISHED` marketplace listing.
+- **Secure Discovery Index**: The `/api/v1/marketplace/listings/` endpoint powers exact, partial, and faceted searches (by language, category, LOC, and tags). It runs exclusively against the `MarketplaceListing` entity, structurally isolating and hiding any `PRIVATE` or `UNLISTED` draft projects.
+- **Explainable Recommendations**: A rule-based engine generates customized project recommendations by analyzing a developer's explicit `SavedProject` portfolio. Each suggestion returns a discrete `recommendation_reason` without relying on black-box AI logic.
+- **Analytics & Curation**: Supports user-curated `Watchlist`s and `SavedProject` folders. Features asynchronous telemetry via `SearchQueryLog` to identify "Zero-Result Searches", letting administrators spot unserved market demands.
+
 ## Requirements
 
 - Python 3.11+
