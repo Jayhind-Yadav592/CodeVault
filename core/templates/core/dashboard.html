@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Developer Dashboard{% endblock %}
+
+{% block content %}
+<h2>Developer Dashboard</h2>
+<hr>
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total Projects</h5>
+                <h2>{{ projects.count }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5 class="card-title">Profile Completion</h5>
+                <h2>{% if profile %}{{ profile.completion_percentage }}%{% else %}0%{% endif %}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>My Projects</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Language</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for project in projects %}
+        <tr>
+            <td>{{ project.name }}</td>
+            <td>{{ project.category.name|default:"-" }}</td>
+            <td>{{ project.primary_language }}</td>
+            <td><span class="badge bg-info">{{ project.get_state_display }}</span></td>
+            <td>
+                <a href="#" class="btn btn-sm btn-outline-primary">View</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="text-center">No projects found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

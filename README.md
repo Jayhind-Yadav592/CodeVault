@@ -20,19 +20,28 @@ The project uses a highly modular structure to separate concerns.
 ```text
 codevault/
 ├── codevault/          # Django project configuration
-├── core/               # Abstract base models, exceptions, and common utilities
-├── accounts/           # Custom User model and authentication views
+├── core/               # Abstract base models, unified exceptions, base Web UI
+├── accounts/           # Custom User model and authentication APIs
 ├── audit/              # Audit logging foundation
-├── developers/         # Developer management (scaffolded)
+├── developers/         # Developer profiles and dashboard APIs
+├── projects/           # Core Project Management, Categories, and Lifecycle
+├── notifications/      # User notifications
 ├── repositories/       # Git repository management (scaffolded)
 ├── reviews/            # Code review and PR management (scaffolded)
 ├── compliance/         # Compliance checks and enforcement (scaffolded)
 ├── licensing/          # Proprietary licensing management (scaffolded)
 ├── finance/            # Billing and financial logic (scaffolded)
-├── notifications/      # System notifications (scaffolded)
 ├── analytics/          # Platform analytics (scaffolded)
-└── ...
 ```
+
+## Phase 2: Developer & Project Management
+
+Phase 2 introduces a complete Developer and Software Project Management subsystem.
+- **Developer Profiles**: Rich profiles with stats and completion tracking.
+- **Project Lifecycle Engine**: State machine for transitioning projects from DRAFT -> SUBMITTED -> UNDER_REVIEW.
+- **Ownership Declaration**: Versioned, immutable ownership signatures required for project submission.
+- **RBAC APIs**: Strict cross-user data isolation via `IsProjectOwner` permissions.
+- **Search & Filter**: Powerful querying capabilities via `django-filter` integration.
 
 ## Requirements
 
