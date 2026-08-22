@@ -149,6 +149,14 @@ CodeVault implements a decoupled, append-only Event Sourcing and Data Warehouse 
 - **Idempotent Consumers & DLQ**: A consumer framework tracks execution against a `ConsumerCheckpoint`. Events that trigger exceptions are automatically safely parked in an `EventProcessingError` Dead Letter Queue (DLQ) for admin review and replay. Consumers guarantee idempotency, ensuring that replays (e.g., `license.activated`) do not duplicate financial tracking.
 - **Star-Schema Projections**: To power robust querying and dashboarding, raw events are asynchronously projected into Dimensional (`DimProject`, `DimDate`) and Fact (`FactLicense`, `FactRepositoryAnalysis`) tables.
 
+## Phase 17: Workflow Automation, Rules Engine & Process Orchestration
+
+CodeVault implements a secure orchestration layer mapping immutable Domain Events to business actions.
+- **Sandboxed Condition Engine**: To eliminate the risk of arbitrary code execution, workflow triggers are written as JSON Abstract Syntax Trees (ASTs). The `ConditionEngine` parses these trees strictly against a whitelist of safe operators, outright rejecting raw python strings, `eval`, or module imports.
+- **Controlled Actions & Immutability**: All executable actions are hardcoded behind an explicit registry (`CREATE_TASK`, `PAUSE_PROJECT`). Workflows are versioned; once activated, the ORM prevents modifications, ensuring historical executions trace to mathematically unchangeable logic.
+- **Infinite Loop Circuit Breakers**: Built-in recursive-execution protection counts `correlation_id` depth and explicitly terminates execution to prevent runaway automation cascades.
+- **Human Approval Gates**: The orchestrator allows actions to trigger a `WAITING_APPROVAL` status. Executions pause securely in the database until an `ApprovalGate` is authorized by the required human role via the API.
+
 ## Requirements
 
 - Python 3.11+

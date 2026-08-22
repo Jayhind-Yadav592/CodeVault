@@ -120,3 +120,7 @@ def admin_data_dashboard(request):
     if not request.user.is_staff:
         return HttpResponseForbidden()
     return render(request, 'core/admin/data_dashboard.html')
+
+@login_required
+def org_workflows_dashboard(request, org_id):
+    return render(request, 'core/admin/workflows_dashboard.html', {'org_id': org_id})
