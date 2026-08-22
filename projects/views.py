@@ -26,7 +26,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
     
     def get_queryset(self):
         # Users can only see their own projects in this viewset
-        return Project.objects.filter(owner=self.request.user)
+        return Project.objects.filter(owner=self.request.user).select_related('category', 'owner')
 
     def get_serializer_class(self):
         if self.action == 'retrieve':

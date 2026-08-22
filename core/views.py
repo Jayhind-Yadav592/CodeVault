@@ -10,7 +10,7 @@ def home(request):
 
 @login_required
 def dashboard(request):
-    projects = request.user.owned_projects.all()
+    projects = request.user.owned_projects.select_related('category').all()
     try:
         profile = request.user.developer_profile
     except DeveloperProfile.DoesNotExist:

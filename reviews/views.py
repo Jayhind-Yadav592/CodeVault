@@ -18,8 +18,8 @@ class ReviewCaseViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         # Admins/Reviewers see all. Developers see their own.
         if self.request.user.is_staff:
-            return ReviewCase.objects.all()
-        return ReviewCase.objects.filter(project__owner=self.request.user)
+            return ReviewCase.objects.all().select_related('project', 'snapshot')
+        return ReviewCase.objects.filter(project__owner=self.request.user).select_related('project', 'snapshot')
 
     @action(detail=True, methods=['post'])
     def transition(self, request, pk=None):

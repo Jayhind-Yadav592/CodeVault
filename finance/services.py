@@ -79,7 +79,10 @@ class RevenueService:
             project=agreement.request.product.project
         )
         
-        wallet, _ = Wallet.objects.get_or_create(owner=creator, currency=currency)
+        wallet = Wallet.objects.select_for_update().filter(owner=creator, currency=currency).first()
+        if not wallet:
+            wallet = Wallet.objects.create(owner=creator, currency=currency)
+            
         wallet.available_balance += net_amount
         wallet.total_earned += net_amount
         wallet.save()
@@ -93,11 +96,11 @@ class PayoutService:
         if not org or org.verification_status != Organization.VerificationStatus.VERIFIED:
             raise ValidationError("KYC verification is required before requesting a payout.")
             
-        wallet = Wallet.objects.get(owner=creator, currency=currency)
-        if wallet.available_balance < amount:
-            raise ValidationError("Insufficient balance.")
-            
         with db_transaction.atomic():
+            wallet = Wallet.objects.select_for_update().get(owner=creator, currency=currency)
+            if wallet.available_balance < amount:
+                raise ValidationError("Insufficient balance.")
+                
             req, created = PayoutRequest.objects.get_or_create(
                 idempotency_key=idempotency_key,
                 defaults={
@@ -145,7 +148,7 @@ class PayoutService:
         payout_req.transaction = txn
         payout_req.save()
         
-        wallet = payout_req.wallet
+        wallet = Wallet.objects.select_for_update().get(id=payout_req.wallet_id)
         wallet.pending_balance -= payout_req.amount
         wallet.total_withdrawn += payout_req.amount
         wallet.save()
