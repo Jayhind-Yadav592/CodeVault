@@ -78,3 +78,11 @@ def admin_operations(request):
     if not request.user.is_staff:
         pass
     return render(request, 'core/admin_operations.html')
+
+@login_required
+def api_credentials_view(request):
+    return render(request, 'core/api_credentials.html')
+
+@login_required
+def webhooks_view(request):
+    return render(request, 'core/webhooks.html')

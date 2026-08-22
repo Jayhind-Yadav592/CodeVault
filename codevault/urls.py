@@ -19,6 +19,8 @@ urlpatterns = [
     path('finance/admin/', core.views.finance_admin, name='finance_admin'),
     path('admin/platform/', core.views.admin_platform_dashboard, name='admin_platform_dashboard'),
     path('admin/operations/', core.views.admin_operations, name='admin_operations'),
+    path('integrations/credentials/', core.views.api_credentials_view, name='api_credentials'),
+    path('integrations/webhooks/', core.views.webhooks_view, name='webhooks'),
     path('api/v1/accounts/', include('accounts.urls', namespace='accounts')),
     path('api/v1/developers/', include('developers.urls', namespace='developers')),
     path('api/v1/projects/', include('projects.urls', namespace='projects')),
@@ -29,5 +31,6 @@ urlpatterns = [
     path('api/v1/licensing/', include('licensing.urls', namespace='licensing')),
     path('api/v1/finance/', include('finance.urls', namespace='finance')),
     path('api/v1/analytics/', include('analytics.urls', namespace='analytics')),
+    path('api/v1/integrations/', include('integrations.urls', namespace='integrations')),
     path('api/v1/notifications/', include('notifications.urls', namespace='notifications')),
 ]

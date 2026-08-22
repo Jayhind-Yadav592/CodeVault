@@ -96,6 +96,12 @@ Phase 9 establishes the operational hub for platform administrators, securely de
 - **Time-Series Analytics**: To circumvent heavy N+1 queries during admin panel loads, background aggregators pre-compute daily `PlatformMetric`s (Active Devs, Gross Revenue) into static rows.
 - **Operational Safety**: Health APIs expose database metrics safely. Feature Flags and System Configurations provide zero-downtime control over application routes and business logic limits (e.g., minimum LOC thresholds).
 
+## Phase 10: Integration Platform, Webhooks & Developer API
+
+Phase 10 transforms CodeVault into an extensible ecosystem safely communicating with the outside world.
+- **Secure Scoped API**: Developer API tokens are irreversibly hashed at creation. Interactions enforce granular scopes (`projects:read`, `webhooks:write`) and throttle limits.
+- **Webhooks & SSRF Defenses**: Emitted events traverse a cryptographic HMAC-SHA256 signature process before payload delivery. Endpoints are aggressively filtered for Server-Side Request Forgery (SSRF) to shield internal architectures.
+
 ## Requirements
 
 - Python 3.11+
