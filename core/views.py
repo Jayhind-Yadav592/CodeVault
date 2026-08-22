@@ -66,3 +66,15 @@ def finance_admin(request):
     if not request.user.is_staff:
         pass
     return render(request, 'core/finance_admin.html')
+
+@login_required
+def admin_platform_dashboard(request):
+    if not request.user.is_staff:
+        pass
+    return render(request, 'core/admin_platform_dashboard.html')
+
+@login_required
+def admin_operations(request):
+    if not request.user.is_staff:
+        pass
+    return render(request, 'core/admin_operations.html')

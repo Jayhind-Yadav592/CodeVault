@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.conf import settings
 from django.utils import timezone
 
 class UUIDModel(models.Model):
@@ -21,6 +22,19 @@ class TimeStampedModel(models.Model):
 
     class Meta:
         abstract = True
+
+class SystemConfiguration(UUIDModel, TimeStampedModel):
+    key = models.CharField(max_length=100, unique=True)
+    value = models.JSONField(default=dict)
+    description = models.TextField(blank=True)
+    version = models.IntegerField(default=1)
+    updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
+
+class FeatureFlag(UUIDModel, TimeStampedModel):
+    name = models.CharField(max_length=100, unique=True)
+    is_enabled = models.BooleanField(default=False)
+    description = models.TextField(blank=True)
+    updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
 class SoftDeleteManager(models.Manager):
     def get_queryset(self):
