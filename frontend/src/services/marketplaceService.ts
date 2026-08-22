@@ -1,9 +1,9 @@
 import api from './api';
-import type { MarketplaceDashboardData } from '../types/marketplace';
+import type { MarketplaceListing } from '../types/marketplace';
 
 export const marketplaceService = {
-  getData: async (): Promise<{ results: MarketplaceDashboardData[] }> => {
-    const response = await api.get('/marketplace/marketplacelistings/');
+  getListings: async (): Promise<{ results: MarketplaceListing[] }> => {
+    const response = await api.get('/marketplace/listings/');
     return response.data;
   }
 };

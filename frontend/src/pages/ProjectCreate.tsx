@@ -19,10 +19,10 @@ export const ProjectCreate: React.FC = () => {
     try {
       const data = {
         name,
-        short_description: description,
+        short_description: description, full_description: description,
         primary_language: 'Python', // Default for now
-        development_status: 'prototype',
-        project_type: 'web_application'
+        development_status: 'alpha',
+        project_type: 'application'
       };
       const proj = await projectService.createProject(data);
       navigate(`/projects/${proj.id}`);

@@ -1,8 +1,8 @@
 import api from './api';
-import type { FinanceDashboardData } from '../types/finance';
+import type { FinanceTransaction } from '../types/finance';
 
 export const financeService = {
-  getData: async (): Promise<{ results: FinanceDashboardData[] }> => {
+  getTransactions: async (): Promise<{ results: FinanceTransaction[] }> => {
     const response = await api.get('/finance/transactions/');
     return response.data;
   }

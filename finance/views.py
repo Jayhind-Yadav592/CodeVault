@@ -30,7 +30,12 @@ class TransactionViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         if self.request.user.is_staff:
             return Transaction.objects.all()
-        return Transaction.objects.filter(project__owner=self.request.user)
+        from django.db.models import Q
+        return Transaction.objects.filter(
+            Q(project__owner=self.request.user) |
+            Q(agreement__request__organization__owner=self.request.user) |
+            Q(payoutrequest__owner=self.request.user)
+        ).distinct()
 
 class PayoutMethodViewSet(viewsets.ModelViewSet):
     serializer_class = PayoutMethodSerializer

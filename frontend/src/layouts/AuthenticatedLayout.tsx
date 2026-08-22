@@ -1,6 +1,6 @@
 import { Outlet, Navigate, NavLink } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LayoutDashboard, Folder, GitBranch, ShieldCheck, Lock, CheckSquare, FileText, ShoppingBag, DollarSign, BarChart2, Shield, Settings, AlertTriangle, LogOut, Bell } from 'lucide-react';
+import { LayoutDashboard, Folder, GitBranch, ShieldCheck, Lock, CheckSquare, FileText, ShoppingBag, DollarSign, Shield, LogOut, Bell } from 'lucide-react';
 import { cn } from '../utils';
 
 export const AuthenticatedLayout = () => {
@@ -19,10 +19,7 @@ export const AuthenticatedLayout = () => {
     { to: '/licensing', label: 'Licensing', icon: FileText },
     { to: '/marketplace', label: 'Marketplace', icon: ShoppingBag },
     { to: '/finance', label: 'Finance', icon: DollarSign },
-    { to: '/analytics', label: 'Analytics', icon: BarChart2 },
-    { to: '/governance', label: 'Governance', icon: Shield },
-    { to: '/workflow', label: 'Workflows', icon: Settings },
-    { to: '/incident', label: 'Incidents', icon: AlertTriangle },
+
   ];
 
   return (

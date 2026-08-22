@@ -1,9 +1,13 @@
 import api from './api';
-import type { LicensingDashboardData } from '../types/licensing';
+import type { LicenseAgreement, LicenseRequest } from '../types/licensing';
 
 export const licensingService = {
-  getData: async (): Promise<{ results: LicensingDashboardData[] }> => {
-    const response = await api.get('/licensing/licenseagreements/');
+  getAgreements: async (): Promise<{ results: LicenseAgreement[] }> => {
+    const response = await api.get('/licensing/agreements/');
+    return response.data;
+  },
+  getRequests: async (): Promise<{ results: LicenseRequest[] }> => {
+    const response = await api.get('/licensing/requests/');
     return response.data;
   }
 };

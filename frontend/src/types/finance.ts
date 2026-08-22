@@ -1,6 +1,10 @@
-export interface FinanceDashboardData {
-    id: string;
-    name: string;
-    status: string;
-    created_at: string;
+export interface FinanceTransaction {
+  id: string;
+  transaction_type: 'payment' | 'payout' | 'refund' | 'adjustment' | 'fee';
+  status: 'pending' | 'completed' | 'failed' | 'reversed';
+  currency: string;
+  description: string;
+  project?: string;
+  agreement?: string;
+  created_at: string;
 }
