@@ -14,7 +14,7 @@ export const TableRow = ({ children }: { children: React.ReactNode }) => (
   <tr className="bg-white border-b hover:bg-gray-50">{children}</tr>
 );
 
-export const TableCell = ({ children, isHeader = false }: { children: React.ReactNode; isHeader?: boolean }) => {
-  if (isHeader) return <th className="px-6 py-3">{children}</th>;
-  return <td className="px-6 py-4">{children}</td>;
+export const TableCell = ({ children, isHeader = false, className, colSpan }: { children: React.ReactNode; isHeader?: boolean; className?: string; colSpan?: number }) => {
+  if (isHeader) return <th className={`px-6 py-3 ${className || ''}`} colSpan={colSpan}>{children}</th>;
+  return <td className={`px-6 py-4 ${className || ''}`} colSpan={colSpan}>{children}</td>;
 };
