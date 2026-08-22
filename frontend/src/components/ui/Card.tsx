@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { cn } from '../../utils';
 
 export const Card = ({ className, children }: { className?: string; children: React.ReactNode }) => (

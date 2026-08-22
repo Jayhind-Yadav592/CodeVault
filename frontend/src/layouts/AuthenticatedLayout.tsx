@@ -1,8 +1,7 @@
-import React from 'react';
 import { Outlet, Navigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-export const AuthenticatedLayout: React.FC = () => {
+export const AuthenticatedLayout = () => {
   const { user, loading, logout } = useAuth();
 
   if (loading) return <div>Loading...</div>;
@@ -23,6 +22,9 @@ export const AuthenticatedLayout: React.FC = () => {
             <li><Link to="/dashboard" className="block p-2 hover:bg-blue-50 text-gray-700 hover:text-blue-700 rounded font-medium">Dashboard</Link></li>
             <li><Link to="/projects" className="block p-2 hover:bg-blue-50 text-gray-700 hover:text-blue-700 rounded font-medium">Projects</Link></li>
             <li><Link to="/repositories" className="block p-2 hover:bg-blue-50 text-gray-700 hover:text-blue-700 rounded font-medium">Repositories</Link></li>
+            <div className="pt-4 pb-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">Compliance</div>
+            <li><Link to="/compliance" className="block p-2 hover:bg-blue-50 text-gray-700 hover:text-blue-700 rounded font-medium">Dashboard</Link></li>
+            <li><Link to="/compliance/rules" className="block p-2 hover:bg-blue-50 text-gray-700 hover:text-blue-700 rounded font-medium">Rule Registry</Link></li>
           </ul>
         </aside>
         <main className="flex-1 p-8 overflow-y-auto">

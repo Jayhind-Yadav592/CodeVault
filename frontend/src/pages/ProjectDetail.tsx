@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { projectService } from '../services/projectService';
-import { Project } from '../types/project';
+import type { Project } from '../types/project';
 import { LoadingState } from '../components/ui/LoadingState';
 import { Badge } from '../components/ui/Badge';
 import { Card, CardContent, CardHeader } from '../components/ui/Card';

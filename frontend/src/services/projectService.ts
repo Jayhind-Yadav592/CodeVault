@@ -1,5 +1,5 @@
 import api from './api';
-import { Project, DashboardData } from '../types/project';
+import type { Project, DashboardData } from '../types/project';
 
 export const projectService = {
   getDashboardStats: async (): Promise<DashboardData> => {

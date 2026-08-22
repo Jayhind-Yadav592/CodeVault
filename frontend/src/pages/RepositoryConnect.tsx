@@ -4,7 +4,7 @@ import { repositoryService } from '../services/repositoryService';
 import { projectService } from '../services/projectService';
 import { Input } from '../components/ui/Input';
 import { Button } from '../components/ui/Button';
-import { Project } from '../types/project';
+import type { Project } from '../types/project';
 
 export const RepositoryConnect: React.FC = () => {
   const [url, setUrl] = useState('');

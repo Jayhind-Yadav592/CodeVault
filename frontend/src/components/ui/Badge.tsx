@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { cn } from '../../utils';
 
 interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {

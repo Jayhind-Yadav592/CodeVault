@@ -1,5 +1,5 @@
 import api from './api';
-import { RepositoryConnection, AnalysisSnapshot, TrainPlexReadiness } from '../types/repository';
+import type { RepositoryConnection, AnalysisSnapshot, TrainPlexReadiness } from '../types/repository';
 
 export const repositoryService = {
   getConnections: async (): Promise<{ results: RepositoryConnection[] }> => {

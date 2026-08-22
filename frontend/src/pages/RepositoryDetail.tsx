@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { repositoryService } from '../services/repositoryService';
-import { RepositoryConnection, AnalysisSnapshot, TrainPlexReadiness } from '../types/repository';
+import type { RepositoryConnection, AnalysisSnapshot, TrainPlexReadiness } from '../types/repository';
 import { LoadingState } from '../components/ui/LoadingState';
 import { Badge } from '../components/ui/Badge';
 import { Card, CardHeader, CardContent } from '../components/ui/Card';

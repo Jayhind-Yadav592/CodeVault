@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { projectService } from '../services/projectService';
-import { Project } from '../types/project';
+import type { Project } from '../types/project';
 import { Button } from '../components/ui/Button';
 import { LoadingState } from '../components/ui/LoadingState';
 import { Table, TableHeader, TableRow, TableCell } from '../components/ui/Table';

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { projectService } from '../services/projectService';
-import { DashboardData } from '../types/project';
+import type {  DashboardData  } from "../types/project";
 import { Card, CardContent, CardHeader } from '../components/ui/Card';
 import { LoadingState } from '../components/ui/LoadingState';
 

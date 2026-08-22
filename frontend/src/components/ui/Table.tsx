@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 export const Table = ({ children }: { children: React.ReactNode }) => (
   <div className="overflow-x-auto w-full">

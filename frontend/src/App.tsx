@@ -10,6 +10,9 @@ import { ProjectCreate } from './pages/ProjectCreate';
 import { RepositoryList } from './pages/RepositoryList';
 import { RepositoryConnect } from './pages/RepositoryConnect';
 import { RepositoryDetail } from './pages/RepositoryDetail';
+import { ComplianceDashboard } from './pages/ComplianceDashboard';
+import { ComplianceRules } from './pages/ComplianceRules';
+import { EvaluationDetail } from './pages/EvaluationDetail';
 
 function App() {
   return (
@@ -29,6 +32,10 @@ function App() {
             <Route path="/repositories" element={<RepositoryList />} />
             <Route path="/repositories/connect" element={<RepositoryConnect />} />
             <Route path="/repositories/:id" element={<RepositoryDetail />} />
+            
+            <Route path="/compliance" element={<ComplianceDashboard />} />
+            <Route path="/compliance/rules" element={<ComplianceRules />} />
+            <Route path="/compliance/evaluations/:id" element={<EvaluationDetail />} />
             
             <Route path="/admin" element={<div>Admin (WIP)</div>} />
           </Route>

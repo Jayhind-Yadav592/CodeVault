@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { repositoryService } from '../services/repositoryService';
-import { RepositoryConnection } from '../types/repository';
+import type { RepositoryConnection } from '../types/repository';
 import { Button } from '../components/ui/Button';
 import { LoadingState } from '../components/ui/LoadingState';
 import { Table, TableHeader, TableRow, TableCell } from '../components/ui/Table';
