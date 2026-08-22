@@ -34,9 +34,82 @@ class ProjectViewSet(viewsets.ModelViewSet):
         return ProjectSerializer
 
     def get_permissions(self):
-        if self.action in ['list', 'create']:
+        if self.action in ['list', 'create', 'dashboard']:
             return [IsAuthenticated()]
         return [IsAuthenticated(), IsProjectOwner()]
+
+    @action(detail=False, methods=['get'])
+    def dashboard(self, request):
+        user = request.user
+        projects = Project.objects.filter(owner=user)
+        
+        # Projects Summary
+        total_projects = projects.count()
+        active_projects = projects.filter(state__in=[Project.State.SUBMITTED, Project.State.UNDER_REVIEW]).count()
+        draft_projects = projects.filter(state=Project.State.DRAFT).count()
+        approved_projects = projects.filter(state=Project.State.APPROVED).count()
+        rejected_projects = projects.filter(state=Project.State.REJECTED).count()
+        
+        # Repositories Summary
+        from repositories.models import Repository
+        repos = Repository.objects.filter(project__owner=user)
+        connected_repos = repos.count()
+        pending_analysis = repos.filter(analysis_status='pending').count()
+        completed_analysis = repos.filter(analysis_status='completed').count()
+        failed_analysis = repos.filter(analysis_status='failed').count()
+        
+        # Compliance Summary
+        from compliance.models import ProjectEvaluation
+        evals = ProjectEvaluation.objects.filter(project__owner=user).order_by('-evaluated_at')
+        # Simulate distinct('project') for sqlite
+        seen = set()
+        unique_evals = []
+        for e in evals:
+            if e.project_id not in seen:
+                seen.add(e.project_id)
+                unique_evals.append(e)
+                
+        passing_evals = sum(1 for e in unique_evals if e.status == 'pass')
+        failed_evals = sum(1 for e in unique_evals if e.status == 'fail')
+        
+        # Security Summary
+        from security.models import Finding
+        findings = Finding.objects.filter(snapshot__repository__project__owner=user, status='open')
+        critical_findings = findings.filter(severity='critical').count()
+        high_findings = findings.filter(severity='high').count()
+        
+        # Activity
+        from audit.models import AuditLog
+        activity = AuditLog.objects.filter(user=user).order_by('-timestamp')[:5]
+        
+        return Response({
+            'projects': {
+                'total': total_projects,
+                'active': active_projects,
+                'draft': draft_projects,
+                'approved': approved_projects,
+                'rejected': rejected_projects
+            },
+            'repositories': {
+                'connected': connected_repos,
+                'pending': pending_analysis,
+                'completed': completed_analysis,
+                'failed': failed_analysis
+            },
+            'compliance': {
+                'passing': passing_evals,
+                'failed': failed_evals
+            },
+            'security': {
+                'critical': critical_findings,
+                'high': high_findings,
+                'open': findings.count()
+            },
+            'recent_activity': [
+                {'action': a.action, 'resource': a.resource_type, 'timestamp': a.timestamp}
+                for a in activity
+            ]
+        })
 
     def perform_create(self, serializer):
         project = serializer.save(owner=self.request.user)
