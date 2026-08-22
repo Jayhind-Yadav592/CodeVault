@@ -68,6 +68,14 @@ Phase 5 introduces an advanced security and intellectual property scanning subsy
 - **Cross-Phase Integration**: Seamlessly integrates into Phase 4, turning security discoveries into critical, automated compliance failures requiring human-review overrides.
 - **Reviewer Workflow**: Maintains an immutable `FindingActivity` ledger to audit every finding interaction, including resolving, acknowledging, and marking false positives.
 
+## Phase 6: Multi-Stage Review, Approval & Remediation Workflow
+
+Phase 6 implements the authoritative human-in-the-loop workflow, bridging automated scanner insights with final eligibility determination.
+- **Strict State Machine**: Enforces a rigid lifecycle (`TRIAGE` -> `TECHNICAL_REVIEW` -> `IP_REVIEW` -> `SECURITY_REVIEW` -> `COMPLIANCE_REVIEW` -> `FINAL_REVIEW`).
+- **Granular RBAC**: Defines distinct roles for Technical, IP, Security, and Compliance reviewers. Sandbox boundaries prevent developers from viewing internal deliberations while surfacing actionable remediations.
+- **Automated Gateway Blocking**: The system physically prevents Final Approval if critical security findings or compliance policy rules are unresolved, acting as an immutable guardrail against human error.
+- **Remediation Lifecycle**: Connects developer fixes to follow-up analysis snapshots, allowing seamless re-evaluation cycles.
+
 ## Requirements
 
 - Python 3.11+

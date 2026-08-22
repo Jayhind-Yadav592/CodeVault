@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Project Reviews: {{ project.name }}</h2>
+    <div class="row mt-4">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Current Review Status</div>
+                <div class="card-body" id="review-status">
+                    Loading...
+                </div>
+            </div>
+            
+            <div class="card mt-4">
+                <div class="card-header bg-warning">Remediation Items</div>
+                <div class="card-body">
+                    <ul id="remediations-list">
+                        <li>None</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Actions</div>
+                <div class="card-body">
+                    <button class="btn btn-primary btn-block">Submit for Review</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById('review-status').innerHTML = "State: <strong>DRAFT</strong>";
+    });
+</script>
+{% endblock %}

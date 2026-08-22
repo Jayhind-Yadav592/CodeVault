@@ -1,0 +1,53 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Reviewer Dashboard</h2>
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header bg-danger text-white">Pending Triages</div>
+                <div class="card-body"><h3>0</h3></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header bg-warning text-dark">Security Reviews</div>
+                <div class="card-body"><h3>0</h3></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header bg-primary text-white">Final Approvals</div>
+                <div class="card-body"><h3>0</h3></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header bg-success text-white">Approved</div>
+                <div class="card-body"><h3>0</h3></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-4">
+        <h4>Review Queue</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Project</th>
+                    <th>Current Stage</th>
+                    <th>Assigned Roles</th>
+                    <th>Priority</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="5">Queue empty.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
