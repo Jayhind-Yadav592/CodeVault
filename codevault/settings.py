@@ -61,6 +61,11 @@ INSTALLED_APPS = [
     'governance',
     'data_platform',
     'workflows',
+    'knowledge',
+    'incidents',
+    'support',
+    'billing',
+    'storage_platform',
 ]
 
 MIDDLEWARE = [

@@ -30,7 +30,7 @@ class TestScanners:
         with tempfile.TemporaryDirectory() as temp_dir:
             # Create a file with a secret
             with open(os.path.join(temp_dir, 'config.py'), 'w') as f:
-                f.write('AWS_KEY = "AKIAIOSFODNN7EXAMPLE"')
+                f.write('AWS_KEY = "AKIAMOCKSECRET123456"')
                 
             ctx = ScannerContext(proj, snap, temp_dir)
             scanner = SecretScanner()
@@ -40,7 +40,7 @@ class TestScanners:
             fnd = findings[0]
             assert fnd.category == Finding.Category.SECRET
             assert fnd.severity == Finding.Severity.CRITICAL
-            assert 'AKIAIOSFODNN7EXAMPLE' not in fnd.redacted_evidence
+            assert 'AKIAMOCKSECRET123456' not in fnd.redacted_evidence
             assert '[REDACTED]' in fnd.redacted_evidence
 
     def test_pii_scanner_ignores_test_data(self, project_setup):
